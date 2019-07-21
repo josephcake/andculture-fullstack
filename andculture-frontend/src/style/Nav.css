@@ -1,8 +1,10 @@
 #Nav{
-  max-width: 100%;
+  width: 100%;
   display: block;
+  font-size: 25px;
 }
 .navDiv{
+  height:15%;
   margin: 5px 5px 15px 5px;
   display: flex;
   flex-wrap: wrap;
@@ -14,7 +16,7 @@
 }
 
 .highlightNav{
-  background-color: rgb(22, 69, 84);
+  background: rgb(224, 67, 36);
 }
 .navChoices{
   border-radius: 6px;
@@ -22,7 +24,7 @@
   padding: 25px 10px;
 }
 .navChoices:hover{
-  background-color:rgba(22, 69, 84, 0.2);
+  background-color:rgba(224, 67, 36, 0.7);
 }
 .navChoices a{
   padding: 3px 12px;

@@ -28,15 +28,15 @@ router.post('/update/:id', function(req, res) {
   Brewery.findById(req.params.id)
   .then(brewery => {
     brewery.name = req.body.name;
-    brewery.breweryType = req.body.breweryType;
+    brewery.brewery_type = req.body.brewery_type;
     brewery.street = req.body.street;
     brewery.city = req.body.city;
     brewery.state = req.body.state;
-    brewery.postal = req.body.postal;
+    brewery.postal_code = req.body.postal_code;
     brewery.longitude = req.body.longitude;
     brewery.latitude = req.body.latitude;
     brewery.phone = req.body.phone;
-    brewery.url = req.body.url;
+    brewery.website_url = req.body.website_url;
 
     brewery.save()
     .then(() => res.json("brewery updated"))
@@ -47,29 +47,31 @@ router.post('/update/:id', function(req, res) {
     // res.send('breweriesAPI: Working');
 });
 
-router.post('/post', function(req, res, next) {
+router.post('/', function(req, res, next) {
+  const _id = req.body.id;
   const name = req.body.name;
-  const breweryType = req.body.breweryType;
+  const brewery_type = req.body.brewery_type;
   const street = req.body.street;
   const city = req.body.city;
   const state = req.body.state;
-  const postal = req.body.postal;
+  const postal_code = req.body.postal_code;
   const longitude = req.body.longitude;
   const latitude = req.body.latitude;
   const phone = req.body.phone;
-  const url = req.body.url;
+  const website_url = req.body.website_url;
 
   const newBrewery = new Brewery({
+    _id,
     name,
-    breweryType,
+    brewery_type,
     street,
     city,
     state,
-    postal,
+    postal_code,
     longitude,
     latitude,
     phone,
-    url
+    website_url
   })
 
   newBrewery.save()

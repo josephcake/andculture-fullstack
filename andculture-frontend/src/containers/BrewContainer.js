@@ -5,8 +5,14 @@ class BrewContainer extends React.PureComponent{
   render(){
     let breweries = this.props.breweries.map(brew => <Breweries key={brew.id} handleDetails={this.props.handleDetails} brewery={brew}/>)
     return (
-      <>
-        <h1>Breweries in {this.props.city}</h1>
+      <div id="brewContainer">
+        {
+          this.props.city
+          ?
+          <h1 id="brew-in">Breweries in {this.props.city}</h1>
+          :
+          null
+        }
         <table id="mainTable" >
           <tbody>
             <tr className="tRow">
@@ -18,7 +24,7 @@ class BrewContainer extends React.PureComponent{
             {breweries}
           </tbody>
         </table>
-      </>
+      </div>
     )
   }
 }

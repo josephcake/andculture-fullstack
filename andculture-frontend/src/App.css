@@ -7,58 +7,13 @@ body{
   outline: none;
   margin: 0;
   padding: 0;
-
+  background: black;
 }
 .App{
   display: block;
   flex-wrap: wrap;
   overflow-x: hidden;
   height:100vh;
-  /* color: white; */
+  color: white;  
   /* background: black; */
-}
-
-.address-text{
-  text-align: center;
-  letter-spacing: 5px;
-  font-size: 30px;
-  font-family: monospace;
-}
-
-#mainTable{
-  width: 90%;
-  margin: 20px auto;
-  overflow: auto;
-  padding: 10px 30px;
-}
-
-.tRow{
-  text-transform: capitalize;
-  cursor: pointer;
-  height: 100px;
-}
-.tRow:nth-of-type(1){
-  box-shadow: 4px 4px 4px 1px lightgray;
-  font-size: 25px;
-  letter-spacing: 5px;
-}
-.tRow:hover:not(:nth-of-type(1)){
-  background-color: rgba(230, 227, 227, 0.2);
-}
-.breweryName{
-  color: salmon;
-  text-decoration: none;
-  text-transform: uppercase;
-  outline: none;
-}
-.tHeader{
-  width: 300px;
-  height: 80px;
-  text-align: center;
-}
-.tData{
-  padding: 40px 5px;
-  text-align: center;
-  border-bottom: solid 1px lightgray;
-  height: 80px;
 }

@@ -3,16 +3,17 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const brewerySchema = new Schema({
+  _id:Number,
   name: String,
-  breweryType: String,
+  brewery_type: String,
   street: String,
   city: String,
   state:String,
-  postal:String,
-  longitude:Number,
-  latitude:Number,
+  postal_code:String,
+  longitude:String,
+  latitude:String,
   phone:String,
-  url:String
+  website_url:String
 })
 const Brewery = mongoose.model('Brewery', brewerySchema)
 module.exports = Brewery

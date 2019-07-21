@@ -11,6 +11,15 @@ class Search extends React.PureComponent{
     selectedBrewery:{},
     windowSize:null
   }
+
+  handleResize=()=>{
+    //google static map require a set size.
+    const windowSize = window.innerWidth;
+    this.setState({
+      windowSize: windowSize
+    })
+  }
+
   componentDidMount(){
     console.log("Search");
     window.addEventListener("resize", this.handleResize);
@@ -19,13 +28,6 @@ class Search extends React.PureComponent{
     })
   }
 
-  handleResize=()=>{
-    //google static map require a set size.
-    const windowSize = window.innerWidth;
-    this.setState({
-        windowSize: windowSize
-    })
-  }
   closeDetails=()=>{
     this.setState({
       selectedBrewery:{}
@@ -61,11 +63,26 @@ class Search extends React.PureComponent{
   }
   render(){
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input id="search" autoComplete="off" type="text" value={this.state.value} name="city" onChange={this.handleValue} placeholder="Search . . . eg: New York"/>
+      <div id="search">
+        <form style=
+        {{
+            margin:
+            this.state.city === ''
+            ?
+            '20% auto'
+            :
+            '0'
+          }}
+        onSubmit={this.handleSubmit}>
+          <input id="search-input" autoComplete="off" type="text" value={this.state.value} name="city" onChange={this.handleValue} placeholder="Search a city to brew-brew . . . "/>
         </form>
-        <BrewContainer city={this.state.city} breweries={this.state.breweries} handleDetails={this.handleDetails}/>
+        {
+          this.state.city !== ''
+          ?
+          <BrewContainer city={this.state.city} breweries={this.state.breweries} handleDetails={this.handleDetails}/>
+          :
+          null
+        }
         {
           Object.keys(this.state.selectedBrewery).length > 0
           ?

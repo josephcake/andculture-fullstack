@@ -7,10 +7,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-
-import indexRouter from './routes/index';
-import usersRouter from './routes/users';
-import testAPIRouter from './routes/testAPI';
 import breweriesAPI from './routes/breweries';
 
 const app = express();
@@ -29,37 +25,12 @@ connection.once('open', ()=>{
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/testAPI', testAPIRouter);
 app.use('/api/breweries', breweriesAPI);
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-app.get('/users', (req, res) => {
-  return res.send('GET HTTP method on user resource');
-});
-
-app.post('/users', (req, res) => {
-  return res.send('POST HTTP method on user resource');
-});
-
-app.put('/users', (req, res) => {
-  return res.send('PUT HTTP method on user resource');
-});
-
-app.delete('/users', (req, res) => {
-  return res.send('DELETE HTTP method on user resource');
-});
-
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Switch, Route, withRouter } from "react-router-dom";
-import Nav from './components/Nav.js'
 import Home from './containers/Home.js'
+import About from './containers/About.js'
+import Favorites from './containers/Favorites.js'
+import Nav from './components/Nav.js'
 import Search from './components/Search.js'
 import './style/Nav.css'
 import './style/Brewery.css'
 import './style/Home.css'
 import './style/Search.css'
-
 
 import './App.css';
 
@@ -24,7 +25,10 @@ class App extends React.PureComponent {
               return <Search />
             }} />
             <Route exact path='/about' render={() =>{
-              return <Search />
+              return <About />
+            }} />
+            <Route exact path='/favorites' render={() =>{
+              return <Favorites />
             }} />
           </Switch>
 
