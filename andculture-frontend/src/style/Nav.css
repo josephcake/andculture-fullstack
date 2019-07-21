@@ -1,0 +1,32 @@
+#Nav{
+  max-width: 100%;
+  display: block;
+}
+.navDiv{
+  margin: 5px 5px 15px 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#navSites{
+  background-color: rgb(22, 22, 22);
+  margin: 0;
+  padding: 0;
+}
+
+.highlightNav{
+  background-color: rgb(22, 69, 84);
+}
+.navChoices{
+  border-radius: 6px;
+  margin: 0 auto;
+  padding: 25px 10px;
+}
+.navChoices:hover{
+  background-color:rgba(22, 69, 84, 0.2);
+}
+.navChoices a{
+  padding: 3px 12px;
+  text-decoration: none;
+  color: white;
+  letter-spacing: 5px;
+}

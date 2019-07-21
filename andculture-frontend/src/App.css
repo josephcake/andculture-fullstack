@@ -1,33 +1,64 @@
-.App {
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    /* background: transparent;  /* Optional: just make scrollbar invisible */
+}
+body{
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+
+}
+.App{
+  display: block;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  height:100vh;
+  /* color: white; */
+  /* background: black; */
+}
+
+.address-text{
+  text-align: center;
+  letter-spacing: 5px;
+  font-size: 30px;
+  font-family: monospace;
+}
+
+#mainTable{
+  width: 90%;
+  margin: 20px auto;
+  overflow: auto;
+  padding: 10px 30px;
+}
+
+.tRow{
+  text-transform: capitalize;
+  cursor: pointer;
+  height: 100px;
+}
+.tRow:nth-of-type(1){
+  box-shadow: 4px 4px 4px 1px lightgray;
+  font-size: 25px;
+  letter-spacing: 5px;
+}
+.tRow:hover:not(:nth-of-type(1)){
+  background-color: rgba(230, 227, 227, 0.2);
+}
+.breweryName{
+  color: salmon;
+  text-decoration: none;
+  text-transform: uppercase;
+  outline: none;
+}
+.tHeader{
+  width: 300px;
+  height: 80px;
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tData{
+  padding: 40px 5px;
+  text-align: center;
+  border-bottom: solid 1px lightgray;
+  height: 80px;
 }

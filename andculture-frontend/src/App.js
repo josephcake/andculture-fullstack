@@ -1,28 +1,36 @@
 import React from 'react';
-import Search from './components/search.js'
+import { Switch, Route, withRouter } from "react-router-dom";
+import Nav from './components/Nav.js'
+import Home from './containers/Home.js'
+import Search from './components/Search.js'
+import './style/Nav.css'
+import './style/Brewery.css'
+import './style/Home.css'
+import './style/Search.css'
+
+
 import './App.css';
 
-class App extends React.Component {
-  state={
-    value:"",
-  }
-  handleValue=(e)=>{
-    this.setState({
-      value: e.target.value
-    })
-  }
-
-  handleSubmit=(event)=>{
-    event.preventDefault()
-    console.log(event.target.city.value)
-  }
+class App extends React.PureComponent {
   render(){
     return (
-      <div className="App">
-        <Search value={this.state.value} handleValue={this.handleValue} handleSubmit={(event)=>this.handleSubmit(event)}/>
-      </div>
+        <div className="App">
+          <Nav />
+          <Switch>
+            <Route exact path='/' render={() =>{
+              return <Home />
+            }} />
+            <Route exact path='/search' render={() =>{
+              return <Search />
+            }} />
+            <Route exact path='/about' render={() =>{
+              return <Search />
+            }} />
+          </Switch>
+
+        </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
