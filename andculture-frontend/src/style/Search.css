@@ -13,7 +13,9 @@ form{
   /* border:none; */
   border-left: 0;
   border-right: 0;
-  border-radius: 15px;
+  border-top: 0;
+  border-bottom: solid rgb(224, 67, 36) 1px;
+  /* border-radius: 15px; */
   letter-spacing: 2px;
   background-color: black;
   color: white;
@@ -34,4 +36,23 @@ form{
   width: 100%;
   background-color: black;
   color:white;
+}
+.myPos{
+  display: block;
+  /* width: 100%; */
+  padding:30px;
+  border-radius: 50px;
+  margin: 50px auto 0;
+  background: rgb(224, 67, 36);
+  font-size: 30px;
+  letter-spacing: 8px;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.hideMe{
+  display: none;
 }

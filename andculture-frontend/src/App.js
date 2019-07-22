@@ -13,22 +13,39 @@ import './style/Search.css'
 import './App.css';
 
 class App extends React.PureComponent {
+  state={
+    currentPage:"home"
+  }
+  componentDidMount(){
+    let href = window.location.href.split('/')
+    href = href[href.length-1]
+    if(href !== ""){
+      this.setState({
+        currentPage: href
+      })
+    }
+  }
+  handlePage=(e)=>{
+    this.setState({
+      currentPage: e.target.innerText.toLowerCase()
+    })
+  }
   render(){
     return (
         <div className="App">
-          <Nav />
+          <Nav handlePage={this.handlePage} currentPage={this.state.currentPage}/>
           <Switch>
             <Route exact path='/' render={() =>{
-              return <Home />
+              return <Home handlePage={this.handlePage}/>
             }} />
             <Route exact path='/search' render={() =>{
               return <Search />
             }} />
+            <Route exact path='/favorites' render={() =>{
+              return <Favorites currentPage={this.state.currentPage}/>
+            }} />
             <Route exact path='/about' render={() =>{
               return <About />
-            }} />
-            <Route exact path='/favorites' render={() =>{
-              return <Favorites />
             }} />
           </Switch>
 

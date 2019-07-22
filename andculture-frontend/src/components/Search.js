@@ -19,7 +19,6 @@ class Search extends React.PureComponent{
       windowSize: windowSize
     })
   }
-
   componentDidMount(){
     console.log("Search");
     window.addEventListener("resize", this.handleResize);
@@ -27,14 +26,13 @@ class Search extends React.PureComponent{
       windowSize: window.innerWidth
     })
   }
-
   closeDetails=()=>{
     this.setState({
       selectedBrewery:{}
     })
   }
-  handleDetails=(breweryID)=>{
-    let foundBrewery = this.state.breweries.find(brew => brew.id === breweryID)
+  handleDetails=(brewery)=>{
+    let foundBrewery = this.state.breweries.find(brew => brew.id === brewery.id)
     this.setState({
       selectedBrewery:foundBrewery
     }, ()=>{
@@ -42,8 +40,13 @@ class Search extends React.PureComponent{
     })
   }
   handleSubmit=(event)=>{
-    event.preventDefault()
-    const city = event.target.city.value.toLowerCase()
+    let city;
+    if(typeof(event) !== 'string'){
+      event.preventDefault()
+      city = event.target.city.value.toLowerCase()
+    }else{
+      city = event
+    }
     console.log(this.state)
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then(req => req.json())
@@ -61,6 +64,34 @@ class Search extends React.PureComponent{
       value: e.target.value
     })
   }
+  handleMySubmit=(lat, long)=>{
+    // let lat;
+    // let long;
+    // lat = position.coords.latitude.toFixed(6);
+    // long = position.coords.longitude.toFixed(6);
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8`)
+    .then(resp=>resp.json())
+    .then(city => {
+      console.log(city);
+      console.log(city.plus_code.compound_code);
+      console.log(city.plus_code.compound_code.split(",")[0].replace(" ", "zazazaza").split("zazazaza")[1]);
+      let cityName = city.plus_code.compound_code.split(",")[0].replace(" ", "zazazaza").split("zazazaza")[1]
+      this.handleSubmit(cityName)
+    })
+  }
+
+  brewNearMe=()=>{
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+        this.handleMySubmit(position.coords.latitude, position.coords.longitude);
+      });
+    } else {
+        alert("Geolocation is not on/supported by this browser.");
+    }
+    // console.log(lat, long);
+  }
+
   render(){
     return(
       <div id="search">
@@ -69,13 +100,14 @@ class Search extends React.PureComponent{
             margin:
             this.state.city === ''
             ?
-            '20% auto'
+            '15% auto 0'
             :
             '0'
           }}
         onSubmit={this.handleSubmit}>
           <input id="search-input" autoComplete="off" type="text" value={this.state.value} name="city" onChange={this.handleValue} placeholder="Search a city to brew-brew . . . "/>
         </form>
+        <button className={this.state.breweries.length === 0 ? "myPos" : "hideMe"}onClick={this.brewNearMe}>Use my location</button>
         {
           this.state.city !== ''
           ?

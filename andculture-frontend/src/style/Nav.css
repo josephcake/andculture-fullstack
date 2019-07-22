@@ -16,7 +16,8 @@
 }
 
 .highlightNav{
-  background: rgb(224, 67, 36);
+  border: solid rgb(224, 67, 36) 1px;
+  /* background: rgb(224, 67, 36); */
 }
 .navChoices{
   border-radius: 6px;

@@ -8,12 +8,13 @@ body{
   margin: 0;
   padding: 0;
   background: black;
+  font-family: 'Dosis', sans-serif;
 }
 .App{
   display: block;
   flex-wrap: wrap;
   overflow-x: hidden;
   height:100vh;
-  color: white;  
+  color: white;
   /* background: black; */
 }

@@ -1,29 +1,21 @@
 import React from 'react'
 import { StaticGoogleMap, Marker} from 'react-static-google-map';
-class Brewery extends React.PureComponent{
-  // fetch(`https://maps.googleapis.com/maps/api/staticmap?center=${selectedBrewery.latitude},${selectedBrewery.latitude}&zoom=8&size=400x400&key=AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8`)
-  // const center = {lat: Number(selectedBrewery.latitude).toFixed(6), lng: Number(selectedBrewery.longitude).toFixed(6)};
-  // const map = new google.maps.Map(
-    // document.getElementById('map'), {zoom: 4, center: center});
-  // const marker = new google.maps.Marker({position: center, map: map});
-  // <img src={"https://maps.googleapis.com/maps/api/staticmap?size=600x600&scale=1&format=png&maptype=roadmap&markers=size:normal%7Ccolor:red%7Clabel:T%7C40.737102,-73.990318%7C40.749825,-73.987963&key=AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8"}/>
-    // const str = selectedBrewery.phone;
-    // let phone;
-    // if(str.length > 0){
-    //   phone = '(' + str.substr(0,3) + ')' + str.substr(3,3) + '-' + str.substr(6);
-    // }
-    addToFav=()=>{
-      fetch(`http://localhost:9001/api/breweries`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.props.selectedBrewery)
-      })
-      console.log("Added to the database");
-    }
 
-    checkDataBase=()=>{
+class Brewery extends React.PureComponent{
+
+  addToFav=()=>{
+    fetch(`http://localhost:9001/api/breweries`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.props.selectedBrewery)
+    })
+    console.log("Added to the database");
+  }
+
+  checkDataBase=()=>{
+    if(this.props.currentPage === 'search'){
       fetch(`http://localhost:9001/api/breweries/${this.props.selectedBrewery.id}`)
       .then(resp=>resp.json())
       .then(brew =>{
@@ -36,19 +28,29 @@ class Brewery extends React.PureComponent{
           this.addToFav()
         }
       })
+    }else{
+      console.log("Already in Favorites - Doesnt do anything HAHA");
     }
+  }
 
 
   render(){
-
+    const str = this.props.selectedBrewery.phone;
+    let phone;
+    if(str.length > 0){
+      phone = '(' + str.substr(0,3) + ')' + str.substr(3,3) + '-' + str.substr(6);
+    }
     return(
       <div id="brewery">
-        <button id="close" onClick={this.props.closeDetails}>CLOSE</button>
+        <div className="btn-container">
+          <button id="close" className="brew-buttons" onClick={this.props.closeDetails}>CLOSE</button>
+          <button id="plus" className="brew-buttons" onClick={this.checkDataBase}>❤︎</button>
+        </div>
         <div id="brewery-container">
           <div id="brewery-img" className="brewery-section">
             <div id="profile" className="brewery-inner">
-              <h2 onClick={this.checkDataBase} className="profile-text">{this.props.selectedBrewery.name}</h2>
-              <h4 className="profile-text">{'phone'}</h4>
+              <h4  className="profile-text">{this.props.selectedBrewery.name}</h4>
+              <h4 className="profile-text">{phone}</h4>
               <h4 className="profile-text"><a className="breweryName" target="_blank" rel="noopener noreferrer" href={this.props.selectedBrewery.website_url}>{this.props.selectedBrewery.website_url}</a></h4>
             </div>
           </div>
@@ -78,6 +80,14 @@ class Brewery extends React.PureComponent{
                   `550x500`
                   :
                   `700x500`
+                }
+                style={
+                  {
+                    feature:'landscape',
+                    element:'all',
+                    visibility:'simplified',
+                    hue:'0xe4e4e4'
+                  }
                 }
                 className="img-fluid" apiKey="AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8"
                 >

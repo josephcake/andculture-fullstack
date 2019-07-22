@@ -1,11 +1,13 @@
 import React from 'react';
 import BrewContainer from './BrewContainer.js'
+import Brewery from '../components/Brewery.js'
 
 
 class Favorites extends React.PureComponent{
   state={
     breweries:[],
-    windowSize:null
+    windowSize:null,
+    selectedBrewery:{}
   }
 
   handleResize=()=>{
@@ -13,6 +15,19 @@ class Favorites extends React.PureComponent{
     const windowSize = window.innerWidth;
     this.setState({
       windowSize: windowSize
+    })
+  }
+  handleDetails=(brewery)=>{
+    let foundBrewery = this.state.breweries.find(brew => brew._id === brewery._id)
+    this.setState({
+      selectedBrewery:foundBrewery
+    }, ()=>{
+      console.log(this.state);
+    })
+  }
+  closeDetails=()=>{
+    this.setState({
+      selectedBrewery:{}
     })
   }
   componentDidMount(){
@@ -34,6 +49,13 @@ class Favorites extends React.PureComponent{
     return(
       <div id="favorites">
         <BrewContainer breweries={this.state.breweries} handleDetails={this.handleDetails}/>
+        {
+          Object.keys(this.state.selectedBrewery).length > 0
+          ?
+          <Brewery currentPage={this.props.currentPage} windowSize={this.state.windowSize} closeDetails={this.closeDetails} selectedBrewery={this.state.selectedBrewery}/>
+          :
+          null
+        }
       </div>
     )
   }
