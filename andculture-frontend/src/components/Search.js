@@ -1,7 +1,8 @@
 import React from 'react'
 import Brewery from './Brewery.js'
 import BrewContainer from '../containers/BrewContainer.js'
-
+import {action} from '../methods/index.js'
+import swal from 'sweetalert';
 
 class Search extends React.PureComponent{
   state={
@@ -11,32 +12,10 @@ class Search extends React.PureComponent{
     selectedBrewery:{},
     windowSize:null
   }
-
-  handleResize=()=>{
-    //google static map require a set size.
-    const windowSize = window.innerWidth;
-    this.setState({
-      windowSize: windowSize
-    })
-  }
   componentDidMount(){
-    console.log("Search");
-    window.addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", ()=>action.handleResize(this, window.innerWidth));
     this.setState({
       windowSize: window.innerWidth
-    })
-  }
-  closeDetails=()=>{
-    this.setState({
-      selectedBrewery:{}
-    })
-  }
-  handleDetails=(brewery)=>{
-    let foundBrewery = this.state.breweries.find(brew => brew.id === brewery.id)
-    this.setState({
-      selectedBrewery:foundBrewery
-    }, ()=>{
-      console.log(this.state);
     })
   }
   handleSubmit=(event)=>{
@@ -47,7 +26,6 @@ class Search extends React.PureComponent{
     }else{
       city = event
     }
-    console.log(this.state)
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then(req => req.json())
     .then(brew => {
@@ -65,16 +43,10 @@ class Search extends React.PureComponent{
     })
   }
   handleMySubmit=(lat, long)=>{
-    // let lat;
-    // let long;
-    // lat = position.coords.latitude.toFixed(6);
-    // long = position.coords.longitude.toFixed(6);
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8`)
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${process.env.REACT_APP_GEO_MAP_API_KEY}`)
     .then(resp=>resp.json())
     .then(city => {
-      console.log(city);
-      console.log(city.plus_code.compound_code);
-      console.log(city.plus_code.compound_code.split(",")[0].replace(" ", "zazazaza").split("zazazaza")[1]);
+      // "zazazaz" used for edge cases such as New York, where there is a space within city names.
       let cityName = city.plus_code.compound_code.split(",")[0].replace(" ", "zazazaza").split("zazazaza")[1]
       this.handleSubmit(cityName)
     })
@@ -83,13 +55,16 @@ class Search extends React.PureComponent{
   brewNearMe=()=>{
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
         this.handleMySubmit(position.coords.latitude, position.coords.longitude);
       });
     } else {
-        alert("Geolocation is not on/supported by this browser.");
+      swal(`Geolocation is not support/on for this browser.`, {
+        className: "alert-failed",
+        icon: "error",
+        button: false,
+        timer: 2000
+      })
     }
-    // console.log(lat, long);
   }
 
   render(){
@@ -111,14 +86,14 @@ class Search extends React.PureComponent{
         {
           this.state.city !== ''
           ?
-          <BrewContainer city={this.state.city} breweries={this.state.breweries} handleDetails={this.handleDetails}/>
+          <BrewContainer city={this.state.city} breweries={this.state.breweries} handleDetails={(brewery)=>action.handleDetails(brewery, this)}/>
           :
           null
         }
         {
           Object.keys(this.state.selectedBrewery).length > 0
           ?
-          <Brewery windowSize={this.state.windowSize} closeDetails={this.closeDetails} selectedBrewery={this.state.selectedBrewery}/>
+          <Brewery currentPage={this.props.currentPage} windowSize={this.state.windowSize} closeDetails={()=>action.closeDetails(this)} selectedBrewery={this.state.selectedBrewery}/>
           :
           null
         }

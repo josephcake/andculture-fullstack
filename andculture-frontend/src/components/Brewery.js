@@ -1,5 +1,7 @@
 import React from 'react'
 import { StaticGoogleMap, Marker} from 'react-static-google-map';
+import swal from 'sweetalert';
+
 
 class Brewery extends React.PureComponent{
 
@@ -11,7 +13,12 @@ class Brewery extends React.PureComponent{
         },
         body: JSON.stringify(this.props.selectedBrewery)
     })
-    console.log("Added to the database");
+    .then(value=>{
+      swal(`You've just favorited this!!`, {
+        button: false,
+        timer: 2000
+      })
+    })
   }
 
   checkDataBase=()=>{
@@ -20,19 +27,24 @@ class Brewery extends React.PureComponent{
       .then(resp=>resp.json())
       .then(brew =>{
         if(brew !== null && brew._id === this.props.selectedBrewery.id){
-          console.log(brew);
-          console.log("Already here.");
+          swal(`Already in Favorites!`, {
+            icon: "error",
+            button: false,
+            timer: 2000
+          })
           return true
         }else{
-          console.log("Not in here!");
           this.addToFav()
         }
       })
     }else{
-      console.log("Already in Favorites - Doesnt do anything HAHA");
+      swal(`This button doesn't do anything here, haha!`, {
+        icon: "error",
+        button: false,
+        timer: 2000
+      })
     }
   }
-
 
   render(){
     const str = this.props.selectedBrewery.phone;
@@ -89,7 +101,7 @@ class Brewery extends React.PureComponent{
                     hue:'0xe4e4e4'
                   }
                 }
-                className="img-fluid" apiKey="AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8"
+                className="img-fluid" apiKey={process.env.REACT_APP_GEO_MAP_API_KEY}
                 >
                 {
                   this.props.selectedBrewery.latitude !== null

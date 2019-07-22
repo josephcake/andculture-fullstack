@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 function Breweries({brewery, handleDetails}){
   const str = brewery.phone;
@@ -15,4 +15,4 @@ function Breweries({brewery, handleDetails}){
     </tr>
   )
 }
-export default memo(Breweries)
+export default Breweries

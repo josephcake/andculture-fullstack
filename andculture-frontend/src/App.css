@@ -18,3 +18,35 @@ body{
   color: white;
   /* background: black; */
 }
+/* =========================== */
+/* ========== swal =========== */
+/* =========================== */
+.swal-modal{
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 60%;
+}
+.swal-text{
+  color: white;
+  font-size: 35px;
+  word-spacing: 10px;
+}
+.swal-title{
+  color: white;
+  font-size: 60px;
+}
+.swal-welcome{
+  background-color: rgba(0, 0, 0, 0.8);
+  width: auto;
+  padding: 100px;
+}
+.swal-button-container{
+  margin: auto;
+  display: block;
+  width: 200px;
+}
+.swal-button{
+  height:80px;
+  width: 200px;
+  font-size: 25px;
+  background-color: rgb(224, 67, 36)
+}
