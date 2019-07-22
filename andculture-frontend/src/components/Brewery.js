@@ -1,7 +1,5 @@
 import React from 'react'
 import { StaticGoogleMap, Marker} from 'react-static-google-map';
-import swal from 'sweetalert';
-
 
 class Brewery extends React.PureComponent{
 
@@ -13,12 +11,7 @@ class Brewery extends React.PureComponent{
         },
         body: JSON.stringify(this.props.selectedBrewery)
     })
-    .then(value=>{
-      swal(`You've just favorited this!!`, {
-        button: false,
-        timer: 2000
-      })
-    })
+    console.log("Added to the database");
   }
 
   checkDataBase=()=>{
@@ -27,24 +20,19 @@ class Brewery extends React.PureComponent{
       .then(resp=>resp.json())
       .then(brew =>{
         if(brew !== null && brew._id === this.props.selectedBrewery.id){
-          swal(`Already in Favorites!`, {
-            icon: "error",
-            button: false,
-            timer: 2000
-          })
+          console.log(brew);
+          console.log("Already here.");
           return true
         }else{
+          console.log("Not in here!");
           this.addToFav()
         }
       })
     }else{
-      swal(`This button doesn't do anything here, haha!`, {
-        icon: "error",
-        button: false,
-        timer: 2000
-      })
+      console.log("Already in Favorites - Doesnt do anything HAHA");
     }
   }
+
 
   render(){
     const str = this.props.selectedBrewery.phone;
@@ -101,7 +89,7 @@ class Brewery extends React.PureComponent{
                     hue:'0xe4e4e4'
                   }
                 }
-                className="img-fluid" apiKey={process.env.REACT_APP_GEO_MAP_API_KEY}
+                className="img-fluid" apiKey="AIzaSyCsx14Wtql-iLUmD3hX7gN85xoFcNmPfH8"
                 >
                 {
                   this.props.selectedBrewery.latitude !== null
