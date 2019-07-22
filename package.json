@@ -1,0 +1,5 @@
+"scripts": {
+  "client": "cd andculture-frontend && npm i && npm start",
+  "server": "cd andculture-backend && npm i && npm start",
+  "start": "concurrently \"npm run client\" \"npm run server\" "
+}
