@@ -9,7 +9,7 @@ import './style/Nav.css'
 import './style/Brewery.css'
 import './style/Home.css'
 import './style/Search.css'
-
+import './style/About.css'
 import './App.css';
 
 class App extends React.PureComponent {
