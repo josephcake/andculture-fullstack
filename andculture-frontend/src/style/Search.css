@@ -53,6 +53,42 @@ form{
   cursor: pointer;
   outline: none;
 }
+.myPos:hover{
+  animation: infinite 1s shake-left;
+}
+@keyframes shake-left {
+  0%,
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    -webkit-transform-origin: 0 40%;
+            transform-origin: 0 40%;
+  }
+  10% {
+    -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: rotate(-2deg);
+            transform: rotate(-2deg);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: rotate(2deg);
+            transform: rotate(2deg);
+  }
+  80% {
+    -webkit-transform: rotate(-1deg);
+            transform: rotate(-1deg);
+  }
+  90% {
+    -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+  }
+}
 .hideMe{
   display: none;
 }

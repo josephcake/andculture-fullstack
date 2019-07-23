@@ -17,11 +17,11 @@ function Nav({ handlePage, currentPage }){
         <div className={currentPage === "favorites" ? `navChoices highlightNav` : "navChoices"}>
           <Link onClick={handlePage} to="/favorites">Favorites</Link>
         </div>
-        <div className={currentPage === "about" || currentPage === "learn more"? `navChoices highlightNav` : "navChoices"}>
+        <div className={currentPage === "about" || currentPage === "learn more" ? `navChoices highlightNav` : "navChoices"}>
           <Link onClick={handlePage} to="/about">About</Link>
         </div>
       </div>
     </div>
   )
 }
-export default React.memo(Nav)
+export default memo(Nav)
