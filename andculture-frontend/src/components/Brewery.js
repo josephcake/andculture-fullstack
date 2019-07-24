@@ -22,7 +22,7 @@ class Brewery extends React.PureComponent{
   }
 
   checkDataBase=()=>{
-    if(this.props.currentPage === 'search'){
+    if(window.location.href.includes("search")){
       fetch(`http://localhost:9001/api/breweries/${this.props.selectedBrewery.id}`)
       .then(resp=>resp.json())
       .then(brew =>{

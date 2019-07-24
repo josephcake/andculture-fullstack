@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { Link } from 'react-router-dom'
 
-function Home({handlePage}){
+function Home(){
   return(
     <div id="Home">
       <div className="video-background">
@@ -18,10 +18,10 @@ function Home({handlePage}){
         </p>
       </div>
       <div id="entry">
-          <Link className="entry-btn" onClick={handlePage} to="/search">Search</Link>
-          <Link className="entry-btn" onClick={handlePage} to="/about">Learn More</Link>
+          <Link className="entry-btn" to="/search">Search</Link>
+          <Link className="entry-btn" to="/about">Learn More</Link>
       </div>
     </div>
   )
 }
-export default Home
+export default memo(Home)

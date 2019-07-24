@@ -29,7 +29,7 @@ class Favorites extends React.PureComponent{
         {
           Object.keys(this.state.selectedBrewery).length > 0
           ?
-          <Brewery currentPage={this.props.currentPage} windowSize={this.state.windowSize} closeDetails={()=>action.closeDetails(this)} selectedBrewery={this.state.selectedBrewery}/>
+          <Brewery windowSize={this.state.windowSize} closeDetails={()=>action.closeDetails(this)} selectedBrewery={this.state.selectedBrewery}/>
           :
           null
         }

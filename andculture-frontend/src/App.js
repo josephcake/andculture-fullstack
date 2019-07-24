@@ -15,17 +15,8 @@ import './style/About.css'
 import './App.css';
 
 class App extends React.Component {
-  state={
-    currentPage:"home"
-  }
+
   componentDidMount(){
-    let href = window.location.href.split('/')
-    href = href[href.length-1]
-    if(href !== ""){
-      this.setState({
-        currentPage: href
-      })
-    }
     if(localStorage.token === undefined){
       swal("Good things brewing",{
         className: "swal-welcome",
@@ -35,27 +26,22 @@ class App extends React.Component {
       localStorage.token = "brew-brew";
     }
   }
-  handlePage=(e)=>{
-    this.setState({
-      currentPage: e.target.innerText.toLowerCase()
-    })
-  }
   render(){
     return (
         <div className="App">
-          <Nav handlePage={this.handlePage} currentPage={this.state.currentPage}/>
+          <Nav/>
           <Switch>
             <Route exact path='/' render={() =>{
-              return <Home handlePage={this.handlePage}/>
+              return <Home/>
             }} />
             <Route exact path='/search' render={() =>{
-              return <Search currentPage={this.state.currentPage}/>
+              return <Search/>
             }} />
             <Route exact path='/favorites' render={() =>{
-              return <Favorites currentPage={this.state.currentPage}/>
+              return <Favorites/>
             }} />
             <Route exact path='/about' render={() =>{
-              return <About />
+              return <About/>
             }} />
           </Switch>
 
