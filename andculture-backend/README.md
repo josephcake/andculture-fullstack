@@ -11,3 +11,4 @@ Open [http://localhost:9001](http://localhost:9001) to view it in the browser.
 ATLAS_URI: You need to create a MongoDB Atlas account.
 Make a new cluster and click "Connection".
 Copy and paste the URI.
+Put it in ENV file.
