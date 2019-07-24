@@ -6,7 +6,7 @@ function Home({handlePage}){
     <div id="Home">
       <div className="video-background">
         <div className="video-foreground">
-          <iframe title="brew-vid" src="https://www.youtube.com/embed/ekgzCPauXQM?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=ekgzCPauXQM" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameBorder="0"></iframe>
+          <iframe title="brew-vid" src="https://www.youtube.com/embed/ekgzCPauXQM?controls=0&autohide=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=ekgzCPauXQM" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameBorder="0"></iframe>
         </div>
       </div>
       <div id="home-text">
